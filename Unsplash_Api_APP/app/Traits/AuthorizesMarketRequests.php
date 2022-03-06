@@ -30,7 +30,7 @@ trait AuthorizesMarketRequests
   public function resolveAccessTokenUnsplash()
   
   {
-
+ dd("huhu");
 
   }
 
