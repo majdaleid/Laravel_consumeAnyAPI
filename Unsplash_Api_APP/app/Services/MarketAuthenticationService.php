@@ -28,6 +28,12 @@ class MarketAuthenticationService
         $this->passwordClientSecret = config('services.market.password_client_secret');
     }
  
+
+
+
+     
+
+
     public function getClientCredentialsToken()
     {
         //if $token return a value it will return $token value and will not continue executing the code
@@ -49,7 +55,7 @@ class MarketAuthenticationService
             dd("will execute the condition");
         }*/
 
-        
+
         $formParams = [
             'grant_type' => 'client_credentials',
             'client_id' => $this->clientId,

@@ -29,6 +29,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('authorization', [App\Http\Controllers\Auth\LoginController::class, 'authorization'])->name('authorization');
 
-Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage'])->name('welcome');
+//Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage'])->name('welcome');
 
 Route::get('/{title}-{id}', [App\Http\Controllers\ProductController::class, 'ShowProduct'])->name('products.show');
+
+
+
+
+//Unsplash API
+
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage'])->name('homeAPI');

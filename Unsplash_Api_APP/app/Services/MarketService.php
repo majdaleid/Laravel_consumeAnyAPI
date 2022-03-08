@@ -12,6 +12,8 @@ class MarketService
     use ConsumesExternalServices,AuthorizesMarketRequests,InteractsWithMarketResponses;
 
       protected $baseUri;
+
+      protected $clientId;
     
 
    
@@ -19,13 +21,17 @@ class MarketService
     public function __construct()
     {
         $this->baseUri = config('services.market.base_uri');
-    }
+        $this->clientId = config('services.market.client_id');
 
+       //dd($this->clientId);
+
+    }
    
 
     public function getPhotos()
     {
-        
+        // return $this->makeRequest('GET', 'photos','client_id=hfWznsCyN5P3hHvhGDlXRY353itMYvkqTviQNVppB7g');
+         return $this->makeRequest('GET', 'photos',$this->clientId);
     }
 
 
