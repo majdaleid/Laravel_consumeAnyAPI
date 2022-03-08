@@ -26,4 +26,18 @@ class ProductController extends Controller
             ]
         );
     }
+
+
+
+    public function ShowgivenUserInfo(Request $request)
+    {
+         // dd($request);
+        $userName=$request->name;
+        $UserInfo=$this->marketService->getgivenUserInformation($userName);
+
+        return view('UserSearch')->with(
+            ['UserInfo'=>$UserInfo
+            ]
+        );
+    }
 }

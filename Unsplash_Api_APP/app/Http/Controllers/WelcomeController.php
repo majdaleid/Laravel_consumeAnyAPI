@@ -24,6 +24,10 @@ class WelcomeController extends Controller
     public function ShowWelcomePage()
     {
          $photos=$this->marketService->getPhotos();
-         dd($photos);
+         
+    return view('welcome2')->with(
+        ['photos'=>$photos
+        ]
+    );
     }
 }

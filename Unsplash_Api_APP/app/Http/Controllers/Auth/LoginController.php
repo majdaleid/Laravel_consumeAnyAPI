@@ -66,11 +66,12 @@ class LoginController extends Controller
         if($request->has('code')){
             $tokenData=$this->marketAuthenticationService->getCodeToken($request->code);
 
-
+          dd($tokenData);
             $userData=$this->marketService->getUserInformation();
+        
+          dd($userData);
 
-
-            $user=$this->registerOrUpdateUser($userData,$tokenData);
+           $user=$this->registerOrUpdateUser($userData,$tokenData);
             
             $this->loginUser($user);
            // dd($user);
@@ -88,13 +89,15 @@ class LoginController extends Controller
     {
         return User::updateOrCreate(
             [
-                'service_id' => $userData->identifier,
+                'service_id' => $userData->id,
+                'last_call'=>$userData->updated_at,
+                'email'=>$userData->email,
             ],
             [
                 'grant_type' => $tokenData->grant_type,
                 'access_token' => $tokenData->access_token,
                 'refresh_token' => $tokenData->refresh_token,
-                'token_expires_at' => $tokenData->token_expires_at,
+                //'token_expires_at' => $tokenData->token_expires_at,
             ]
         );
     }

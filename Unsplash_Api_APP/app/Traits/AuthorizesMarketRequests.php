@@ -28,10 +28,11 @@ trait AuthorizesMarketRequests
     }
 
   public function resolveAccessTokenUnsplash()
-  
   {
- dd("huhu");
+    $authenticationService = resolve(MarketAuthenticationService::class);
+    return $authenticationService->getClientCredentialsToken();
 
+   // return 'Bearer vFooLTxwZT5r0o582MW-fWHg-Em-AkPsHQKwnNLAmU8';
   }
 
 }

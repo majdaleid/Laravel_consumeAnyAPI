@@ -39,3 +39,9 @@ Route::get('/{title}-{id}', [App\Http\Controllers\ProductController::class, 'Sho
 //Unsplash API
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage'])->name('homeAPI');
+
+
+//Route::get('https://unsplash.com/oauth/authorize/native', [App\Http\Controllers\Auth\LoginController::class, 'authorization'])->name('authorization');
+
+
+Route::get('/SearchUserInfo', [App\Http\Controllers\ProductController::class, 'ShowgivenUserInfo'])->name('showgivenUserInfo');
