@@ -15,16 +15,14 @@ class MarketService
 
       protected $clientId;
     
-
+      protected $base_uri_public_request;
    
 
     public function __construct()
     {
-       // $this->baseUri = config('services.market.base_uri');
         $this->clientId = config('services.market.client_id');
-        $this->baseUri='https://api.unsplash.com/';
-       //dd($this->clientId);
-
+        //$this->baseUri='https://api.unsplash.com/';
+        $this->baseUri=config('services.market.base_uri_public_request');
     }
    
 
@@ -32,7 +30,7 @@ class MarketService
     {
        
         // return $this->makeRequest('GET', 'photos','client_id=hfWznsCyN5P3hHvhGDlXRY353itMYvkqTviQNVppB7g');
-         return $this->makeRequest('GET', 'photos','client_id='.$this->clientId);
+         return $this->makeRequest('GET', 'photos','page=10&client_id='.$this->clientId);
          
     }
 
@@ -111,4 +109,16 @@ class MarketService
     {
       return $this->makeRequest('GET',"/users/{$user}");
     }
+
+    public function ShowUserStatistics($user)
+    {
+        return $this->makeRequest('GET',"/users/{$user}/statistics");
+      
+    }
+
+    public function ShowPhotoStatistics($id)
+    {
+        return $this->makeRequest('GET',"/photos/{$id}/statistics");
+    }
+
 }

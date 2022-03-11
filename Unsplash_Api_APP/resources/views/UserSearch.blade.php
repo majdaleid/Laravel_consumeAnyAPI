@@ -23,6 +23,31 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{$UserInfo->name}}</h5>
                                     <p class="card-text"></p>
+                                    <h5 class="card-title">{{$UserInfo->total_likes}}</h5>
+
+
+                                    <form method="GET" action="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}">
+                                        @csrf
+                                        <div class="row mb-0">
+                                            <div class="col-md-6 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                   User Statistics
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                               
+
+
+
+
+
+
+
+
+
+                                    <a href="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}"> User Statistic </a>
+                                    
                                 </div>
                             </div>
                         </a>

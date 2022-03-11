@@ -66,15 +66,26 @@ class LoginController extends Controller
         if($request->has('code')){
             $tokenData=$this->marketAuthenticationService->getCodeToken($request->code);
 
-          dd($tokenData);
+         // dd($tokenData);
             $userData=$this->marketService->getUserInformation();
         
-          dd($userData);
+         // dd($userData);
 
            $user=$this->registerOrUpdateUser($userData,$tokenData);
-            
-            $this->loginUser($user);
-           // dd($user);
+          
+         //dd($user);
+        /* $user->service_id=2;
+         $user->last_call="sdsad";
+         $user->email="huhuhu";
+         $user->grant_type="jijo";
+         $user->access_token="asdsdsad";
+         $user->refresh_token="asdsad";
+        */
+ 
+          $this->loginUser($user);
+
+
+           //dd($user);
             return  redirect()->route('home') ;
         }
         return redirect()->route('login')->withErrors(['you cancelled the authorization process']);
@@ -87,6 +98,9 @@ class LoginController extends Controller
    //save the userInfo into database
     public function registerOrUpdateUser($userData,$tokenData)
     {
+       
+
+    
         return User::updateOrCreate(
             [
                 'service_id' => $userData->id,
@@ -109,44 +123,10 @@ class LoginController extends Controller
       session()->regenerate();
     }
 
-    public function login(Request $request)
-    {
-        $this->validateLogin($request);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
-        }
-         try{
-            $tokenData = $this->marketAuthenticationService->getPasswordToken($request->email, $request->password);
 
-            $userData = $this->marketService->getUserInformation();
-
-            $user = $this->registerOrUpdateUser($userData, $tokenData);
-
-            $this->loginUser($user, $request->has('remember'));
-            return  redirect()->route('home') ;
-
-            }catch(\Exception $e){
-                  // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
-            }
-       
-             
-        
-
-      
-       
-    }
-
+ 
     
 
 

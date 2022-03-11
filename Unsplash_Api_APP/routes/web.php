@@ -45,3 +45,13 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage
 
 
 Route::get('/SearchUserInfo', [App\Http\Controllers\ProductController::class, 'ShowgivenUserInfo'])->name('showgivenUserInfo');
+
+
+
+
+
+Route::get('/users/{username}/statistics', [App\Http\Controllers\ProductController::class, 'ShowgivenUserStatistics'])->where('username', '.*')->name('ShowgivenUserStatistics');
+
+Route::get('/photos/{id}/statistics', [App\Http\Controllers\ProductController::class, 'ShowgivenPhotoStatistics'])->name('ShowgivenPhotoStatistics');
+
+//GET /photos/:id/statistics

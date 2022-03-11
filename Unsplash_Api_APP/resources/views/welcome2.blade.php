@@ -24,7 +24,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-2">Products</h2>
+                    <h2 class="display-2">Public Photos </h2>
                 </div>
             </div>
             <div class="row">
@@ -34,8 +34,10 @@
                             <div class="card">
                                 <img src="{{$photo->urls->small_s3}}" class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title"></h5>
-                                    <p class="card-text"></p>
+                                    <h5 class="card-title">Photo Likes: {{$photo->likes}}</h5>
+                                    <p class="card-text">Photo Link: {{$photo->links->html}}</p>
+                                    <p class="card-text">Photo Statistik: {{$photo->links->html}}</p>
+                                    <a href="{{route('ShowgivenPhotoStatistics', ['id' => $photo->id])}}">Photo Statistik</a>
                                 </div>
                             </div>
                         </a>
@@ -46,3 +48,4 @@
     </div>
 </div>
 @endsection
+ 
