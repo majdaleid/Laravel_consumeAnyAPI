@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
-use App\Services\MarketService;
 //use GuzzleHttp\Psr7\Request;
+use App\Models\UserStatistik;
+use App\Services\MarketService;
+use App\Services\SaveApiRequests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -38,16 +41,18 @@ class LoginController extends Controller
 
     protected $marketAuthenticationService;
 
+    protected $saveApiRequests;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(MarketAuthenticationService $marketAuthenticationService,MarketService $marketService)
+    public function __construct(MarketAuthenticationService $marketAuthenticationService,MarketService $marketService,SaveApiRequests $saveApiRequests )
     {
         $this->middleware('guest')->except('logout');
         $this->marketAuthenticationService = $marketAuthenticationService;
-        parent::__construct($marketService);
+        parent::__construct($marketService,$saveApiRequests);
     }
 
 
@@ -66,13 +71,29 @@ class LoginController extends Controller
         if($request->has('code')){
             $tokenData=$this->marketAuthenticationService->getCodeToken($request->code);
 
-         // dd($tokenData);
+
+            //add remember tokenn
+         // dd($tokenData); 
             $userData=$this->marketService->getUserInformation();
-        
+          // remember email
          // dd($userData);
 
            $user=$this->registerOrUpdateUser($userData,$tokenData);
+       //  dd($user);
+           //new
+
           
+           $userInfo=$this->saveApiRequests->registerOrUpdateUserInfo($userData);
+         //  $userInfo=$this->registerOrUpdateUserInfo($userData);
+
+        
+           $userStatistiks=$this->marketService->ShowUserStatistics($userInfo->user_name);
+        
+
+         //  $saveUserStatistiks=$this->registerOrUpdateUserStatistik($userStatistiks);
+           $saveUserStatistiks=$this->saveApiRequests->registerOrUpdateUserStatistik($userStatistiks);
+           
+       // dd("all data saved after successfully log in");
          //dd($user);
         /* $user->service_id=2;
          $user->last_call="sdsad";
@@ -95,7 +116,7 @@ class LoginController extends Controller
 
 
 
-   //save the userInfo into database
+   //save the userInfo into database service_id,accessToken-refresh_token
     public function registerOrUpdateUser($userData,$tokenData)
     {
        
@@ -104,11 +125,11 @@ class LoginController extends Controller
         return User::updateOrCreate(
             [
                 'service_id' => $userData->id,
-                'last_call'=>$userData->updated_at,
-                'email'=>$userData->email,
             ],
             [
-                'grant_type' => $tokenData->grant_type,
+               // 'last_call'=>$userData->updated_at,
+                //'email'=>$userData->email,
+                //'grant_type' => $tokenData->grant_type,
                 'access_token' => $tokenData->access_token,
                 'refresh_token' => $tokenData->refresh_token,
                 //'token_expires_at' => $tokenData->token_expires_at,
@@ -116,7 +137,45 @@ class LoginController extends Controller
         );
     }
 
+/*
+    public function registerOrUpdateUserInfo($userData)
+    {
+       
+        return UserInfo::updateOrCreate(
+            [
+                'service_id' => $userData->id,
+            ],
+            [
+                'last_Page_Call'=>$userData->updated_at,
+                'user_name' => $userData->username,
+                'email'=>$userData->email,
+                'first_name'=>$userData->first_name,
+                'last_name'=>$userData->last_name,
+                'profile_link'=>$userData->links->html,
+                'profile_Image'=>$userData->profile_image->large,
+                'total_likes'=>$userData->total_likes
+                
+                //'token_expires_at' => $tokenData->token_expires_at,
+            ]
+        );
+    }
 
+
+    public function registerOrUpdateUserStatistik($userData)
+    {
+       
+        return UserStatistik::updateOrCreate(
+            [
+                'service_id' => $userData->id,
+            ],
+            [
+                'downloads'=>$userData->downloads->total,
+                'views'=>$userData->views->total
+            ]
+        );
+    }
+
+    */
     public function loginUser(User $user,$remember =true)
     {
       Auth::login($user,$remember);
@@ -124,7 +183,7 @@ class LoginController extends Controller
     }
 
 
-
+  
 
  
     

@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Services\MarketService;
+use App\Services\SaveApiRequests;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
-    public function __construct(MarketService $marketService)
+    protected $saveApiRequests;
+    public function __construct(MarketService $marketService,SaveApiRequests $saveApiRequests )
     {
         $this->middleware('auth')->except(['showProduct']);
-        parent::__construct($marketService);
+        parent::__construct($marketService, $saveApiRequests);
     }
 
     public function ShowProduct($title,$id)
@@ -38,7 +39,8 @@ class ProductController extends Controller
          // dd($request);
         $userName=$request->name;
         $UserInfo=$this->marketService->getgivenUserInformation($userName);
-      //  dd($UserInfo);
+        $SaveUserInfo=$this->saveApiRequests->registerOrUpdateUserInfo($UserInfo);
+        //dd($UserInfo);
         return view('UserSearch')->with(
             ['UserInfo'=>$UserInfo
             ]
@@ -55,9 +57,12 @@ class ProductController extends Controller
   public function ShowgivenUserStatistics($userName)
     {
         //username=theeastlondonphotographer;
-       //  dd($request);
-        //$userName=$request->name;
+       
+
+
+
         $UserStatistic=$this->marketService->ShowUserStatistics($userName);
+        $saveUserStatistiks=$this->saveApiRequests->registerOrUpdateUserStatistik($UserStatistic);
         dd($UserStatistic);
         return view('UserSearch')->with(
             [

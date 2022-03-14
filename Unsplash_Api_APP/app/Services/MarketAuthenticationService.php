@@ -44,6 +44,7 @@ class MarketAuthenticationService
 
 
      if ($token = $this->existingValidToken())  {
+        //dd("there is an access token and no need to a new one");
             return $token;
       }
 
@@ -57,8 +58,8 @@ class MarketAuthenticationService
         }*/
 
 
-
-  
+       
+       // dd("there is no  access token and you  need  a new one because the session is not valid any more");
     }
 
      
