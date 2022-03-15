@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-
+use App\Models\PhotoInfo;
 use App\Traits\ConsumesExternalServices;
 use App\Traits\InteractsWithMarketResponses;
 use App\Traits\AuthorizesMarketRequests;
@@ -10,6 +10,7 @@ use App\Traits\AuthorizesMarketRequests;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\UserStatistik;
+use App\Models\PhotoStatistik;
 
  
 
@@ -61,6 +62,40 @@ class SaveApiRequests
         );
     }
 
+
+
+    public function registerOrUpdatePhotoInfo($photoData)
+    {
+       //'service_id','description','profile_Image','total_likes'
+        return PhotoInfo::updateOrCreate(
+            [
+                'service_id' => $photoData->id,
+            ],
+            [
+                'description'=> $photoData->description,
+                'profile_Image' => $photoData->urls->small_s3,
+                'photo_link'=>$photoData->links->html,
+               // 'email'=>$userData->email,
+                'total_likes'=> $photoData->likes
+            ]
+        );
+    }
+
+
+
+    public function registerOrUpdatePhotoStatistik($photoData)
+    {
+       
+        return PhotoStatistik::updateOrCreate(
+            [
+                'service_id' => $photoData->id,
+            ],
+            [
+                'downloads'=>$photoData->downloads->total,
+                'views'=>$photoData->views->total
+            ]
+        );
+    }
 
      
 

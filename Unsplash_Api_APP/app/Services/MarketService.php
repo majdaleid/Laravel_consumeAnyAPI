@@ -116,6 +116,13 @@ class MarketService
       
     }
 
+
+    
+    public function getgivenPhotoInformation($id)
+    {
+      return $this->makeRequest('GET',"/photos/{$id}");
+    }
+
     public function ShowPhotoStatistics($id)
     {
         return $this->makeRequest('GET',"/photos/{$id}/statistics");

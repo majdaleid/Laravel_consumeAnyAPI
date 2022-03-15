@@ -107,10 +107,11 @@ class ProductController extends Controller
     {
          // dd($request);
        // $userName=$request->name;
-        $PhotoStatistic=$this->marketService->ShowPhotoStatistics($id);
-        dd($PhotoStatistic);
+        $PhotoStatistik=$this->marketService->ShowPhotoStatistics($id);
+        $savePhotoStatistik=$this->saveApiRequests->registerOrUpdatePhotoStatistik($PhotoStatistik);
+        dd($PhotoStatistik);
         return view('UserSearch')->with(
-            ['PhotoStatistic'=>$PhotoStatistic
+            ['PhotoStatistic'=>$PhotoStatistik
             ]
         );
     }
@@ -121,14 +122,16 @@ class ProductController extends Controller
     //get photo likes
    //GET /photos/:id
 
-    public function ShowgivenPhotoLikes($request)
+    public function ShowgivenPhotoLikes($id)
     {
          // dd($request);
-        $userName=$request->name;
-        $UserInfo=$this->marketService->getgivenUserInformation($userName);
-
+       // $userName=$request->name;
+        $PhotoInfo=$this->marketService->getgivenPhotoInformation($id);
+        dd($PhotoInfo);
+        $savePhotoInfo=$this->saveApiRequests->registerOrUpdatePhotoStatistik($PhotoInfo);
+        dd($PhotoInfo);
         return view('UserSearch')->with(
-            ['UserInfo'=>$UserInfo
+            ['UserInfo'=>$PhotoInfo
             ]
         );
     }
