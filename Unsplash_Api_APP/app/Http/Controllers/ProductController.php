@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MarketService;
-use App\Services\SaveApiRequests;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Services\MarketService;
+
+use App\Services\SaveApiRequests;
+use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends Controller
 {
@@ -39,7 +45,13 @@ class ProductController extends Controller
         //theeastlondonphotographer
          // dd($request);
         $userName=$request->name;
+        try{
         $UserInfo=$this->marketService->getgivenUserInformation($userName);
+
+        }catch(Exception $exception){
+            return back()->withErrors(['message' => "Couldn't find User with the given Username"]);
+        }
+
         $SaveUserInfo=$this->saveApiRequests->registerOrUpdateUserInfo($UserInfo);
         //dd($UserInfo);
         return view('UserSearch')->with(
@@ -48,6 +60,7 @@ class ProductController extends Controller
         );
     }
 
+    
     //User statistics
     //number of total downloads
     //GET /users/:username/statistics

@@ -15,8 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-
-
+                    @if($errors->any())
+                    <div class="alert alert-danger">{{$errors->first()}}</div>
+                    @endif
+                   
                     <form method="GET" action="{{ route('showgivenUserInfo') }}">
                         @csrf
 
