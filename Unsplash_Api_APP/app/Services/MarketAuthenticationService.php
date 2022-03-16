@@ -3,9 +3,10 @@
 namespace App\Services;
 
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Traits\ConsumesExternalServices;
 use App\Traits\InteractsWithMarketResponses;
-use App\Models\User;
 
 class MarketAuthenticationService
 {
@@ -24,6 +25,10 @@ class MarketAuthenticationService
        
     }
 
+
+
+    // after login through the api ,will check if there is saved accesstoken 
+    //if accessToken expired ,will generate refresh Token
     public function getClientCredentialsToken()
     {
         //if $token return a value it will return $token value and will not continue executing the code
@@ -33,13 +38,21 @@ class MarketAuthenticationService
 
      if ($token = $this->existingValidToken())  {
          
+      // dd("there is saved access token");
             return $token;
       }
 
+      if (!Auth::user())
+      {
+          return route('login');
+      }
       //hier active again
-          /* if (auth()->user()){
+//dd("huhuhuhuhu1");
+           if (auth()->user()){
+               //
+               dd("return refresh token");
       return $this->refreshAuthenticatedUserToken($user);
-           }/*
+           }
 
 
 
@@ -54,6 +67,7 @@ class MarketAuthenticationService
        // dd("there is no  access token and you  need  a new one because the session is not valid any more");
     }
 
+    //get refresh token 
  public function refreshAuthenticatedUserToken($user)
     {
         $clientId = $this->clientId;
@@ -129,14 +143,7 @@ class MarketAuthenticationService
    //get code after authenticating the user
   public function getCodeToken($code)
   {
-   /* $formParams = [
-      'grant_type' =>'authorization_code',
-      'client_id' =>'1cRhk9nGMVmdv4qHwS3S5ZrjC55dhtsbjoimeFNvf6w',
-        'client_secret' =>'nPsxQc63tXN76uhO1wvgfqTnEd2K8dfz-X71ha2_X18',
-        'redirect_uri' => 'http://127.0.0.1:8000/authorization',
-        'code' => $code,
-    ];
-*/
+   
     $formParams = [
         'grant_type' =>'authorization_code',
         'client_id' =>$this->clientId,
