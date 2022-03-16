@@ -18,12 +18,12 @@ class CreateUserInfosTable extends Migration
             $table->string('service_id');
             $table->string('last_Page_Call');
             $table->string('user_name');
-            $table->string('email')->default('momo@hotmail.com');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('profile_link');
             $table->string('profile_Image');
             $table->integer('total_likes');
+            $table->timestamps();
            
         });
     }

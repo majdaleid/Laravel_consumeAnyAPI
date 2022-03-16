@@ -35,7 +35,6 @@ class DashboardController extends Controller
      $ToptenPhotoLikes=PhotoInfo::orderBy('total_likes','DESC')->limit(10)->get();
 
 
-     
         return view('dashboard')->with(
             ['ToptenPhotoLikes'=>$ToptenPhotoLikes,
             'ToptenPhotoViews'=>$ToptenPhotoViews,

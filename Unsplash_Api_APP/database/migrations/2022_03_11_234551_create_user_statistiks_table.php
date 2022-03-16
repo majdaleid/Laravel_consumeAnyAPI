@@ -18,6 +18,7 @@ class CreateUserStatistiksTable extends Migration
             $table->string('service_id');
             $table->integer('downloads');
             $table->integer('views');
+            $table->timestamps();
            
         });
     }

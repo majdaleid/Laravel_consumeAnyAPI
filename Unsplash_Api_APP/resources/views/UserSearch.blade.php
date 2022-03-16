@@ -9,48 +9,25 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-2">User Profile</h2>
+                    <h2 class="text-center display-4 my-4">User Profile</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="d-flex justify-content-center">
                 
                 @if($UserInfo)
-                    <div class="col-4">
-                        <a href="{{$UserInfo->links->html}}">link to portfolio
-                            <div class="card">
-                                <img src="{{$UserInfo->profile_image->large}}" class="rounded mx-auto d-block" alt="...">
+                    <div class="d-flex justify-content-center">
+                      
+                            <div class="card ">
+                                <img src="{{$UserInfo->profile_image->large}}"  alt="...">
                                
                                 <div class="card-body">
-                                    <h5 class="card-title">{{$UserInfo->name}}</h5>
-                                    <p class="card-text"></p>
-                                    <h5 class="card-title">{{$UserInfo->total_likes}}</h5>
-
-
-                                    <form method="GET" action="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}">
-                                        @csrf
-                                        <div class="row mb-0">
-                                            <div class="col-md-6 offset-md-4">
-                                                <button type="submit" class="btn btn-primary">
-                                                   User Statistics
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                               
-
-
-
-
-
-
-
-
-
-                                    <a href="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}"> User Statistic </a>
-                                    
+                                    <h5 class="card-title">UserName: {{$UserInfo->name}}</h5>
+                                    <h5 class="card-title"><a  href="{{$UserInfo->links->html}}">link to the user portfolio </a></h5>
+                                    <h5 class="card-title">Total Likes: {{$UserInfo->total_likes}}</h5>
+                                    <h5 class="card-title"><a href="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}"> User Statistic </a> </h5>
                                 </div>
                             </div>
-                        </a>
+                      
                     </div>
                 @else 
                 No User founded

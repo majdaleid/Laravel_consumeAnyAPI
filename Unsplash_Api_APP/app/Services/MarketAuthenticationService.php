@@ -32,12 +32,17 @@ class MarketAuthenticationService
         $user = auth()->user();
 
      if ($token = $this->existingValidToken())  {
-        //dd("there is an access token and no need to a new one");
+         
             return $token;
       }
-           if (auth()->user()){
+
+      //hier active again
+          /* if (auth()->user()){
       return $this->refreshAuthenticatedUserToken($user);
-           }
+           }/*
+
+
+
       /*  if ($token = false)  {
            dd("will not execute the condition");
         }
@@ -84,13 +89,12 @@ class MarketAuthenticationService
      */
     public function storeValidToken($tokenData, $grantType)
     {
-  //        $tokenData->token_expires_at = now()->addSeconds($tokenData->expires_in - 5);
+  //        
         $tokenData->access_token = "{$tokenData->token_type} {$tokenData->access_token}";
         $tokenData->grant_type = $grantType;
         
         session()->put(['current_token' => $tokenData]);
-        //will print the tokendata just in case the accesstoken ist unvalid or its expired otherwise it will not print it
-        //dd($tokenData);
+       
     }
 
     //verify if there is any valid token on session
@@ -114,37 +118,40 @@ class MarketAuthenticationService
       $newBaseUri="http://unsplash.com";
       $query = http_build_query([
           'client_id' => $this->clientId,
-        //  'redirect_uri' => 'urn:ietf:wg:oauth:2.0:oob',
           'redirect_uri' => 'http://127.0.0.1:8000/authorization',
           'response_type' => 'code',
           'scope' => 'public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections',
-        //  'scope' => 'purchase-product manage-products manage-account read-general',
       ]);
 
-     // return "{$this->baseUri}/oauth/authorize?{$query}";
       return "{$newBaseUri}/oauth/authorize?{$query}";
   }
 
    //get code after authenticating the user
   public function getCodeToken($code)
   {
-    $formParams = [
+   /* $formParams = [
       'grant_type' =>'authorization_code',
       'client_id' =>'1cRhk9nGMVmdv4qHwS3S5ZrjC55dhtsbjoimeFNvf6w',
         'client_secret' =>'nPsxQc63tXN76uhO1wvgfqTnEd2K8dfz-X71ha2_X18',
         'redirect_uri' => 'http://127.0.0.1:8000/authorization',
         'code' => $code,
     ];
+*/
+    $formParams = [
+        'grant_type' =>'authorization_code',
+        'client_id' =>$this->clientId,
+          'client_secret' => $this->clientSecret,
+          'redirect_uri' => 'http://127.0.0.1:8000/authorization',
+          'code' => $code,
+      ];
+
 
       $tokenData = $this->makeRequest('POST', 'oauth/token', [], $formParams);
-       // dd($tokenData);
-      //you have to uncomment the storevalidtoken and there is not expired api date
+      
       $this->storeValidToken($tokenData, 'authorization_code');
 
       return $tokenData;
   }
-
-  //obtain access token based on user credentials
 
     
 }

@@ -36,6 +36,7 @@ class ProductController extends Controller
    //link to $UserInfo->username
     public function ShowgivenUserInfo(Request $request)
     {
+        //theeastlondonphotographer
          // dd($request);
         $userName=$request->name;
         $UserInfo=$this->marketService->getgivenUserInformation($userName);
@@ -47,9 +48,6 @@ class ProductController extends Controller
         );
     }
 
-
-
-
     //User statistics
     //number of total downloads
     //GET /users/:username/statistics
@@ -58,9 +56,6 @@ class ProductController extends Controller
     {
         //username=theeastlondonphotographer;
        
-
-
-
         $UserStatistic=$this->marketService->ShowUserStatistics($userName);
         $saveUserStatistiks=$this->saveApiRequests->registerOrUpdateUserStatistik($UserStatistic);
         dd($UserStatistic);
@@ -88,14 +83,6 @@ class ProductController extends Controller
                 ]
             );
         }
-
-
-
-
-
-
-
-
 
 
     //photo Statistics

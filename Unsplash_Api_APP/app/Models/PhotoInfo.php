@@ -16,10 +16,6 @@ class PhotoInfo extends Model
      ];
 
 
-     public function photoStatistik()
-     {
-         return $this->belongsTo('App\Models\PhotoStatistik');
-     }
 }
 
  

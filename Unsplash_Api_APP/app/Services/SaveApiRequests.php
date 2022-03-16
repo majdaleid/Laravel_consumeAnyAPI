@@ -12,17 +12,10 @@ use App\Models\UserInfo;
 use App\Models\UserStatistik;
 use App\Models\PhotoStatistik;
 
- 
-
-
-
 
 class SaveApiRequests
 {
   use ConsumesExternalServices,AuthorizesMarketRequests,InteractsWithMarketResponses;
-
-      
-    
 
     public function registerOrUpdateUserInfo($userData)
     {
@@ -34,8 +27,6 @@ class SaveApiRequests
             [
                 'last_Page_Call'=>$userData->updated_at,
                 'user_name' => $userData->username,
-               // 'email'=>$userData->email,
-                'email'=>'user2@hotmail.com',
                 'first_name'=>$userData->first_name,
                 'last_name'=>$userData->last_name,
                 'profile_link'=>$userData->links->html,
@@ -66,7 +57,7 @@ class SaveApiRequests
 
     public function registerOrUpdatePhotoInfo($photoData)
     {
-       //'service_id','description','profile_Image','total_likes'
+      
         return PhotoInfo::updateOrCreate(
             [
                 'service_id' => $photoData->id,
@@ -75,13 +66,10 @@ class SaveApiRequests
                 'description'=> $photoData->description,
                 'profile_Image' => $photoData->urls->small_s3,
                 'photo_link'=>$photoData->links->html,
-               // 'email'=>$userData->email,
                 'total_likes'=> $photoData->likes
             ]
         );
     }
-
-
 
     public function registerOrUpdatePhotoStatistik($photoData)
     {
@@ -97,15 +85,5 @@ class SaveApiRequests
         );
     }
 
-     
-
- 
- 
-
-
-
-
-
-   
-    
+  
 }

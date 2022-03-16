@@ -10,7 +10,7 @@ class UserStatistik extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    //public $timestamps = false;
 
     protected $fillable = [
         'service_id','downloads','views'
