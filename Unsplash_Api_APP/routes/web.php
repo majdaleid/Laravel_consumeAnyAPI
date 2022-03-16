@@ -55,3 +55,5 @@ Route::get('/users/{username}/statistics', [App\Http\Controllers\ProductControll
 Route::get('/photos/{id}/statistics', [App\Http\Controllers\ProductController::class, 'ShowgivenPhotoStatistics'])->name('ShowgivenPhotoStatistics');
 
 //GET /photos/:id/statistics
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'DashboardIndex'])->name('DashboardIndex');
