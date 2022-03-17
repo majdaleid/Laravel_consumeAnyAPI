@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\LogCron;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,9 +29,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('log:cron')->everyMinute();
+       $schedule->command('log:cron')->everyMinute();
 
-        
+      
     }
 
     /**
