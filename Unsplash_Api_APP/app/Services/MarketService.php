@@ -21,7 +21,7 @@ class MarketService
     public function __construct()
     {
         $this->clientId = config('services.market.client_id');
-        //$this->baseUri='https://api.unsplash.com/';
+
         $this->baseUri=config('services.market.base_uri_public_request');
     }
    
@@ -29,17 +29,9 @@ class MarketService
     public function getPhotos()
     {
        
-        // return $this->makeRequest('GET', 'photos','client_id=hfWznsCyN5P3hHvhGDlXRY353itMYvkqTviQNVppB7g');
          return $this->makeRequest('GET', 'photos','page=10&client_id='.$this->clientId);
          
     }
-
-
-    public  function getProduct($id)
-    {
-        return $this->makeRequest('GET', "products/{$id}");
-    }
-
 
     public function getUserInformation()
     {

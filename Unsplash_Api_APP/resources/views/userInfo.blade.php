@@ -21,7 +21,7 @@
                                 <img src="{{$UserInfo->profile_image->large}}"  alt="...">
                                
                                 <div class="card-body">
-                                    <h5 class="card-title">UserName: {{$UserInfo->name}}</h5>
+                                    <h5 class="card-title">Name: {{$UserInfo->name}}</h5>
                                     <h5 class="card-title"><a  href="{{$UserInfo->links->html}}">link to the user portfolio </a></h5>
                                     <h5 class="card-title">Total Likes: {{$UserInfo->total_likes}}</h5>
                                     <h5 class="card-title"><a href="{{route('ShowgivenUserStatistics', ['username' => $UserInfo->username])}}"> User Statistic </a> </h5>

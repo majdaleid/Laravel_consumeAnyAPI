@@ -42,15 +42,14 @@ class MarketAuthenticationService
             return $token;
       }
 
-      if (!Auth::user())
+     /* if (!Auth::user())
       {
           return route('login');
-      }
-      //hier active again
-//dd("huhuhuhuhu1");
+      }*/
+ 
            if (auth()->user()){
                //
-               dd("return refresh token");
+           //    dd("return refresh token");
       return $this->refreshAuthenticatedUserToken($user);
            }
 
@@ -96,14 +95,13 @@ class MarketAuthenticationService
 
 
 
-
     /**
      * Stores a valid token with some attributes
      * @return void
      */
     public function storeValidToken($tokenData, $grantType)
     {
-  //        
+
         $tokenData->access_token = "{$tokenData->token_type} {$tokenData->access_token}";
         $tokenData->grant_type = $grantType;
         
@@ -117,10 +115,9 @@ class MarketAuthenticationService
        
         if (session()->has('current_token')) {
             $tokenData = session()->get('current_token');
-            
-          //  if (now()->lt($tokenData->token_expires_at)) {
+        
                 return $tokenData->access_token;
-          //  }
+         
         }
    
         return false;

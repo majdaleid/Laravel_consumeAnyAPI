@@ -83,7 +83,7 @@ class LoginController extends Controller
        
           $this->loginUser($user);
 
-         return  redirect()->route('home') ;
+         return  redirect()->route('searchUser') ;
         }
         return redirect()->route('login')->withErrors(['you cancelled the authorization process']);
 
@@ -114,5 +114,11 @@ class LoginController extends Controller
       session()->regenerate();
     }
 
+
+    public function GetUserDataThroughCronJob()
+    {
+        $userData=$this->marketService->getUserInformation();
+        $userInfo=$this->saveApiRequests->registerOrUpdateUserInfo($userData);
+    }
 
 }

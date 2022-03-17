@@ -6,7 +6,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-2">the most liked photos</h2>
+                    <h2 class="display-4 text-center">the most liked photos</h2>
                 </div>
             </div>
              
@@ -34,7 +34,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-2">the most viewed photos</h2>
+                    <h2 class="display-4 text-center">the most viewed photos</h2>
                 </div>
             </div>
              
@@ -65,7 +65,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-2">the most downloaded photos</h2>
+                    <h2 class="display-4 text-center">the most downloaded photos</h2>
                 </div>
             </div>
             
@@ -94,7 +94,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-4">Top 10 User Likes</h2>
+                    <h2 class="display-4 text-center">Top 10 User Likes</h2>
                 </div>
             </div>
             
@@ -123,7 +123,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-4">Top 10 User Views</h2>
+                    <h2 class="display-4 text-center">Top 10 User Views</h2>
                 </div>
             </div>
             
@@ -151,7 +151,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h2 class="display-4">Top 10 User Downloads</h2>
+                    <h2 class="display-4 text-center">Top 10 User Downloads</h2>
                 </div>
             </div>
             

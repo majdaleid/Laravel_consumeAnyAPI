@@ -20,7 +20,6 @@ class DashboardController extends Controller
 
     public function DashboardIndex()
     {
-         // dd($request);
 
       $ToptenUserDownloads=UserStatistik::orderBy('downloads','DESC')->limit(10)->get();
 

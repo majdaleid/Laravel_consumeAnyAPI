@@ -59,9 +59,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}   
 
-                                    {{Auth::user()->last_call}}
-                                    {{Auth::user()->email}}
-
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -76,6 +73,15 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('homeAPI')}}">HomePage</a>
+                              </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('searchUser')}}">Search Username</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="{{route('DashboardIndex')}}">Dashboard- Show Statistiks</a>
+                              </li>
                         @endguest
                     </ul>
                 </div>
