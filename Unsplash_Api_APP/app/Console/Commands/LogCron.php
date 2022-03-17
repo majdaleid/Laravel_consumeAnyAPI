@@ -38,7 +38,7 @@ class LogCron extends Command
 
     protected $marketService;
     protected $saveApiRequests;
-    protected $marketAuthenticationService;
+     
 
     use AuthenticatesUsers;
     
@@ -49,11 +49,10 @@ class LogCron extends Command
      * @return void
      */
     
-    public function __construct(MarketAuthenticationService $marketAuthenticationService,MarketService $marketService,SaveApiRequests $saveApiRequests,User $user )
+    public function __construct(MarketService $marketService,User $user )
     {
         $this->marketService=$marketService;
-        $this->saveApiRequests=$saveApiRequests;
-        $this->marketAuthenticationService = $marketAuthenticationService;
+
        $this->user = $user;
         
         parent::__construct();
@@ -96,7 +95,7 @@ class LogCron extends Command
             $access_token= Auth::loginUsingId($accessTokenUser->id)->access_token;
             $this->marketService->resolveAccessTokenUnsplash=$access_token;
             $userData=$this->marketService->getUserInformation();
-            //dd($userData);
+            dd($userData);
           
         }
 
