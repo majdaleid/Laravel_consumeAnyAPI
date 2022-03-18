@@ -25,14 +25,11 @@ class MarketAuthenticationService
        
     }
 
-
-
     // after login through the api ,it will check if there is a saved access token 
     // if $token=false will not return anything and continue executing the code 
-    public function getClientCredentialsToken()
+    public function getToken()
     {
         
-
         $user = auth()->user();
 
      if ($token = $this->existingValidToken())  {
