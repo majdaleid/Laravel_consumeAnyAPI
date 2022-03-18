@@ -13,7 +13,7 @@
  
 git clone https://github.com/majdaleid/Laravel_consumeAnyAPI
 
-then cd Unsplash_Api_APP
+then  cd Laravel_consumeAnyAPI then cd Unsplash_Api_APP
 
 2)  composer install 
 
