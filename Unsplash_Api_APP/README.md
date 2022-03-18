@@ -7,17 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## how to run this project 
+##   project installation
 
- clone the project  
+1) clone the project :
+ 
+git clone https://github.com/majdaleid/Laravel_consumeAnyAPI
 
-1)  composer install 
+then cd Unsplash_Api_APP
 
-2)   create .env file
+2)  composer install 
+
+3)   create .env file
    
    
-
-3) copy all the data from env.example and paste it in .env file
+4) copy all the data from env.example and paste it in .env file
 
 change the data with your database Info .
 
@@ -30,19 +33,19 @@ change the data with your database Info .
 
 
 
-3) under  https://unsplash.com/developers
+5) under  https://unsplash.com/developers
 
    create an application, copy the access key and secret key
    and check all the scopes for  your App.
 
-4) change the value of client_id and client_secret in .env file like the following:
+6) change the value of client_id and client_secret in .env file like the following:
 
    client_id: value of access key from your application under https://unsplash.com/developers
 
    client_secret:value secret key from your application under  https://unsplash.com/developers
 
 
-5) in your developer Unsplash App change the redirect url  to adjust your configuration
+7) in your developer Unsplash App change the redirect url  to adjust your configuration
 
 
   (locally) if you want to test it locally :
@@ -61,10 +64,10 @@ change the data with your database Info .
      'redirect_uri' => 'https://your_link ', 
 
 
-6) excute  php artisan migrate in command line  und if you have any problem with your database just run  (php artisan migrate:refresh)
+8) excute  php artisan migrate in command line  und if you have any problem with your database just run  (php artisan migrate:refresh)
 
 
-7) run  php artisan serve in command line
+9) run  php artisan serve in command line
 
 
 
