@@ -115,10 +115,6 @@ class LoginController extends Controller
     }
 
 
-    public function GetUserDataThroughCronJob()
-    {
-        $userData=$this->marketService->getUserInformation();
-        $userInfo=$this->saveApiRequests->registerOrUpdateUserInfo($userData);
-    }
+    
 
 }

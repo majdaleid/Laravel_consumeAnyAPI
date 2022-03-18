@@ -1,8 +1,10 @@
 <?php
 
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,4 @@ Route::get('/', [App\Http\Controllers\PhotoController::class, 'ShowPhotos'])->na
 Route::get('/photos/{id}/statistics', [App\Http\Controllers\PhotoController::class, 'ShowgivenPhotoStatistics'])->name('ShowgivenPhotoStatistics');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'DashboardIndex'])->name('DashboardIndex');
+
