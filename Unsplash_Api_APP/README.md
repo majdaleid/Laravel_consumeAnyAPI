@@ -11,9 +11,13 @@
 
  clone the project  
 
-1) create .env file
+1)  composer install 
 
-2) copy all the data from env.example and paste it in .env file
+2)   create .env file
+   
+   
+
+3) copy all the data from env.example and paste it in .env file
 
 change the data with your database Info .
 
@@ -31,11 +35,11 @@ change the data with your database Info .
    create an application, copy the access key and secret key
    and check all the scopes for  your App.
 
-4) change the value of cleint_id and client_secret in .env file like the following:
+4) change the value of client_id and client_secret in .env file like the following:
 
-   cleint_id: value of access key from your application under https://unsplash.com/developers
+   client_id: value of access key from your application under https://unsplash.com/developers
 
-   cleint_secret:value secret key from your application under  https://unsplash.com/developers
+   client_secret:value secret key from your application under  https://unsplash.com/developers
 
 
 5) in your developer Unsplash App change the redirect url  to adjust your configuration
@@ -57,10 +61,10 @@ change the data with your database Info .
      'redirect_uri' => 'https://your_link ', 
 
 
-6) excute  php artisan migrate in command line 
+6) excute  php artisan migrate in command line  und if you have any problem with your database just run  (php artisan migrate:refresh)
 
 
-7) excute  php artisan serve in command line
+7) run  php artisan serve in command line
 
 
 
@@ -68,11 +72,11 @@ change the data with your database Info .
 
 
 ## Photos
-)after running the App ,it will  make public photos request in home page depend only on the client id  and it will save all the photosinfo  automatically
+)after running the App ,it will  make public photos requests in home page depend only on the client id  and it will save all the photosinfo  automatically
 
-in database .the photos choosed randomally from unsplash API.
+in the database .the photos will be chosed randomally from unsplash API.
 
-unsplash API will change the photos randomally every couply of minutes
+unsplash API will change the photos randomally after several minutes
 
 so if the photos are the same after calling the home page,they will just be updated in the database .
 
@@ -82,12 +86,14 @@ if new photos appears ,then they will be saved in the database .
 )after login in the APP 
 
 
-after login through the api ,the accesstoken will saved in database and automatically all info from the logged user
+after login through the api ,the access token will saved in the database and automatically all info from the logged user
 will be saved in the database like username , firstname lastname, likes and also the statistiks from these user like views, and downloads
 
 
 ## Photo Statistik
 under (http://127.0.0.1:8000/)
+
+you will be able to see photo statistik just after login with your API
 
 you can see the statistik of every photo from home page (/)after klick the statistik link  that have been shown for every photo.
 
@@ -105,7 +111,7 @@ you can look for a user by giving the username
 the public info for the given user will show like name , username ,likes etc and the info will saved in the database too.
 
 # UserStatistik
-if you clicked one statistik user info , API request will occur and the info will be saved in the database too.
+if you clicked on statistik user info , API request will occur and the info will be saved in the database too.
 
 
 # Dashboard
@@ -140,6 +146,15 @@ php artisan schedule:run
 on  the server configure it to the time you want:
 * * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
 
+
+
+# Notice:
+
+- in this project the focus was on laravel therefore GUI was not considered 
+- some bootstrap classes were added 
+- in the future everything would be adjusted with reactjs with new features from Unsplash API
+
+ 
 
 
 
