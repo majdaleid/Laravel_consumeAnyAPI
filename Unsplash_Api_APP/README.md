@@ -7,55 +7,140 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## how to run this project 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ clone the project  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1) create .env file
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2) copy all the data from env.example and paste it in .env file
 
-## Learning Laravel
+change the data with your database Info .
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    ###### DB_CONNECTION=mysql
+    ###### DB_HOST=127.0.0.1
+    ###### DB_PORT=3306
+    ###### DB_DATABASE=your database name
+    ###### DB_USERNAME=your database username
+    ###### DB_PASSWORD=your database password
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3) under  https://unsplash.com/developers
 
-### Premium Partners
+   create an application, copy the access key and secret key
+   and check all the scopes for  your App.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+4) change the value of cleint_id and client_secret in .env file like the following:
 
-## Contributing
+   cleint_id: value of access key from your application under https://unsplash.com/developers
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   cleint_secret:value secret key from your application under  https://unsplash.com/developers
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5) in your developer Unsplash App change the redirect url  to adjust your configuration
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+  (locally) if you want to test it locally :
+  
+  give the following link  http://127.0.0.1:8000/authorization
 
-## License
+  if you want to test it on your server , adjust it with any link you want and then change it 
+  under services/MarketAuthenticationService.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+  here you can change the http://127.0.0.1:8000/authorization with the link from your application in unsplash account
+
+      'redirect_uri' => 'http://127.0.0.1:8000/authorization', 
+ 
+      change it to :
+ 
+     'redirect_uri' => 'https://your_link ', 
+
+
+6) excute  php artisan migrate in command line 
+
+
+7) excute  php artisan serve in command line
+
+
+
+# Description 
+
+
+## Photos
+)after running the App ,it will  make public photos request in home page depend only on the client id  and it will save all the photosinfo  automatically
+
+in database .the photos choosed randomally from unsplash API.
+
+unsplash API will change the photos randomally every couply of minutes
+
+so if the photos are the same after calling the home page,they will just be updated in the database .
+
+if new photos appears ,then they will be saved in the database .
+
+
+)after login in the APP 
+
+
+after login through the api ,the accesstoken will saved in database and automatically all info from the logged user
+will be saved in the database like username , firstname lastname, likes and also the statistiks from these user like views, and downloads
+
+
+## Photo Statistik
+under (http://127.0.0.1:8000/)
+
+you can see the statistik of every photo from home page (/)after klick the statistik link  that have been shown for every photo.
+
+
+
+after clicking the link ,the statistik info for the clicked photo will saved too to the database like views and downloads
+
+
+## search for a specefic user 
+http://127.0.0.1:8000/home
+
+you can look for a user by giving the username 
+
+# UserInfo
+the public info for the given user will show like name , username ,likes etc and the info will saved in the database too.
+
+# UserStatistik
+if you clicked one statistik user info , API request will occur and the info will be saved in the database too.
+
+
+# Dashboard
+
+## top 10 Users with the most downloads
+
+## top 10 Users with the most views
+
+## top 10 Users with the most likes
+
+## top 10 Photos with the most downloads
+
+## top 10 Photos with the most views
+
+## top 10 Photos with the most likes
+
+
+
+## schedule Tasks
+
+the cron job will execute every hour 
+
+change it to pass your needs .
+
+
+to test cronjob locally 
+
+in the command line :
+php artisan log:cron
+php artisan schedule:run
+
+on  the server configure it to the time you want:
+* * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
+
+
+
+
+

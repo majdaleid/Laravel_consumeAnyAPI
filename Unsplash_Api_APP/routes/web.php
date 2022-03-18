@@ -1,8 +1,10 @@
 <?php
 
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
 
 Auth::routes(['register'=>false,'reset'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- 
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/home', [App\Http\Controllers\UserController::class, 'searchUser'])->name('searchUser');
 
 Route::get('authorization', [App\Http\Controllers\Auth\LoginController::class, 'authorization'])->name('authorization');
 
-Route::get('/', [App\Http\Controllers\WelcomeController::class, 'ShowWelcomePage'])->name('welcome');
+Route::get('/SearchUserInfo', [App\Http\Controllers\UserController::class, 'ShowgivenUserInfo'])->name('showgivenUserInfo');
 
-Route::get('/{title}-{id}', [App\Http\Controllers\ProductController::class, 'ShowProduct'])->name('products.show');
+Route::get('/users/{username}/statistics', [App\Http\Controllers\UserController::class, 'ShowgivenUserStatistics'])->where('username', '.*')->name('ShowgivenUserStatistics');
+
+Route::get('/', [App\Http\Controllers\PhotoController::class, 'ShowPhotos'])->name('homeAPI');
+
+Route::get('/photos/{id}/statistics', [App\Http\Controllers\PhotoController::class, 'ShowgivenPhotoStatistics'])->name('ShowgivenPhotoStatistics');
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'DashboardIndex'])->name('DashboardIndex');
+

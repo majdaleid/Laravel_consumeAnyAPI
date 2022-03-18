@@ -11,10 +11,13 @@ trait ConsumesExternalServices
     
     public function makeRequest($method, $requestUrl, $queryParams = [], $formParams = [], $headers = [])
     {
+
+       // $this->baseUri = "http://unsplash.com";
         $client = new Client([
-            'base_uri' => $this->baseUri,
+           'base_uri' => $this->baseUri,
         ]);
           
+
         //if the request doesnt need an authorization request 
         if(method_exists($this,'resolveAuthorization'))
        {
