@@ -126,7 +126,7 @@ if you clicked one statistik user info , API request will occur and the info wil
 
 ## schedule Tasks
 
-the cron job will excecute every hour 
+the cron job will execute every hour 
 
 change it to pass your needs .
 
