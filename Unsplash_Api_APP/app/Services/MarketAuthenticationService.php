@@ -27,12 +27,11 @@ class MarketAuthenticationService
 
 
 
-    // after login through the api ,will check if there is saved accesstoken 
-    //if accessToken expired ,will generate refresh Token
+    // after login through the api ,it will check if there is a saved access token 
+    // if $token=false will not return anything and continue executing the code 
     public function getClientCredentialsToken()
     {
-        //if $token return a value it will return $token value and will not continue executing the code
-        //if $token=false will not return anything and continue executing the code 
+        
 
         $user = auth()->user();
 
@@ -42,28 +41,12 @@ class MarketAuthenticationService
             return $token;
       }
 
-     /* if (!Auth::user())
-      {
-          return route('login');
-      }*/
- 
-           if (auth()->user()){
-               //
-           //    dd("return refresh token");
+    if (auth()->user()){
+          
       return $this->refreshAuthenticatedUserToken($user);
-           }
 
+     }
 
-
-      /*  if ($token = false)  {
-           dd("will not execute the condition");
-        }
-        if($token = true)
-        {
-            dd("will execute the condition");
-        }*/
-
-       // dd("there is no  access token and you  need  a new one because the session is not valid any more");
     }
 
     //get refresh token 
